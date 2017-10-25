@@ -1,1 +1,2 @@
-include ':core'
+include ":alfos-core"
+include ":alfos-google-cloud-storage"

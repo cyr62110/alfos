@@ -16,6 +16,7 @@ interface StorageOperations {
 
     /**
      * List all collections contained in the storage.
+     * @return a {Flowable} emitting all collections in the storage.
      */
     fun listCollections(): Flowable<StorageCollection>
 }

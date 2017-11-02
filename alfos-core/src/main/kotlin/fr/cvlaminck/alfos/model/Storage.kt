@@ -13,6 +13,16 @@ interface Storage {
     var credentials: StorageCredentials
 
     /**
+     *
+     */
+    val operationsFactory: StorageOperationsFactory
+
+    /**
+     * Scheme used in uri to access the storage of this provider.
+     */
+    val scheme: String
+
+    /**
      * Name of the provider on which this storage is hosted. <br />
      * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
      */

@@ -1,7 +1,7 @@
 package fr.cvlaminck.alfos.operation
 
-import fr.cvlaminck.alfos.model.StorageObject
 import fr.cvlaminck.alfos.model.StorageCollection
+import fr.cvlaminck.alfos.model.StorageObject
 import io.reactivex.Flowable
 
 /**

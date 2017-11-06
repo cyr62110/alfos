@@ -1,6 +1,7 @@
 package fr.cvlaminck.alfos.model
 
 import fr.cvlaminck.alfos.model.auth.StorageCredentials
+import fr.cvlaminck.alfos.name.validator.NameValidator
 import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 
 /**
@@ -17,6 +18,11 @@ interface Storage {
      *
      */
     val operationsFactory: StorageOperationsFactory
+
+    /**
+     * [NameValidator] to use to check that object/collection name are valid for this storage.
+     */
+    val nameValidator: NameValidator
 
     /**
      * Scheme used in uri to access the storage of this provider.

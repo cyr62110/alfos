@@ -1,6 +1,7 @@
 package fr.cvlaminck.alfos.model
 
 import fr.cvlaminck.alfos.model.auth.StorageCredentials
+import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 
 /**
  * Provide all the information to access to collections and objects on an account for a given provider.

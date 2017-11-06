@@ -18,13 +18,13 @@ class StorageOperationsManager(
         TODO("Implements")
     }
 
-    fun getCollectionOperations(uri: String) = StorageObjectUri.fromString(uri)
+    fun getCollectionOperations(uri: String): Single<StorageCollectionOperations> = StorageObjectUri.fromString(uri)
             .flatMap { uri -> getCollectionOperations(uri) }
 
     fun getObjectOperations(uri: StorageObjectUri): Single<StorageObjectOperations> {
         TODO("Implements")
     }
 
-    fun getObjectOperations(uri: String) = StorageObjectUri.fromString(uri)
+    fun getObjectOperations(uri: String): Single<StorageObjectOperations> = StorageObjectUri.fromString(uri)
             .flatMap { uri -> getObjectOperations(uri) }
 }

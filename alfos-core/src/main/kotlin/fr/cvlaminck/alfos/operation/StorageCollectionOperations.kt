@@ -17,13 +17,13 @@ interface StorageCollectionOperations {
 
     /**
      * Get information(acl, ...) about the collection.
-     * @return a {Single} emitting the information(acl, ...) about the collection.
+     * @return a [Single] emitting the information(acl, ...) about the collection.
      */
     fun getInformation(): Single<StorageCollection>
 
     /**
      * List all objects in the collection.
-     * @return a {Flowable} emitting all objects contained in the collection.
+     * @return a [Flowable] emitting all objects contained in the collection.
      */
     fun listObjects(): Flowable<StorageObject>
 }

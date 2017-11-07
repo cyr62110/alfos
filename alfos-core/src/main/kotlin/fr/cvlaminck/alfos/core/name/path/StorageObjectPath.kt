@@ -1,6 +1,6 @@
-package fr.cvlaminck.alfos.name.path
+package fr.cvlaminck.alfos.core.name.path
 
-import fr.cvlaminck.alfos.name.validator.NameValidator
+import fr.cvlaminck.alfos.name.NameValidator
 
 /**
  * Representation of the name of the object as a virtual hierarchy in a collection.

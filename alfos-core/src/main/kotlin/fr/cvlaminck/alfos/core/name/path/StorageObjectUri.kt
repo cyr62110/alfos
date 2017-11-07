@@ -1,4 +1,4 @@
-package fr.cvlaminck.alfos.name.path
+package fr.cvlaminck.alfos.core.name.path
 
 import io.reactivex.Single
 

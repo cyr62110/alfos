@@ -1,7 +1,7 @@
 package fr.cvlaminck.alfos.core
 
 import fr.cvlaminck.alfos.model.Storage
-import fr.cvlaminck.alfos.name.path.StorageObjectUri
+import fr.cvlaminck.alfos.core.name.path.StorageObjectUri
 import fr.cvlaminck.alfos.operation.StorageCollectionOperations
 import fr.cvlaminck.alfos.operation.StorageObjectOperations
 import fr.cvlaminck.alfos.operation.StorageOperations

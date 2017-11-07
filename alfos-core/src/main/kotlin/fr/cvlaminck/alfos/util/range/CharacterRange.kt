@@ -1,4 +1,4 @@
-package fr.cvlaminck.alfos.util
+package fr.cvlaminck.alfos.util.range
 
 /**
  * A range of characters.

@@ -1,4 +1,6 @@
-package fr.cvlaminck.alfos.name.encoder
+package fr.cvlaminck.alfos.core.name.encoder
+
+import fr.cvlaminck.alfos.name.NameEncoder
 
 /**
  * Implementation of [NameEncoder] that will follow the strictest rules of provided naming guidelines:

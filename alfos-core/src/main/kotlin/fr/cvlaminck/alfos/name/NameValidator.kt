@@ -1,4 +1,4 @@
-package fr.cvlaminck.alfos.name.validator
+package fr.cvlaminck.alfos.name
 
 /**
  * Provides methods to validate object and collection name.

@@ -11,4 +11,16 @@ import fr.cvlaminck.alfos.name.NameEncoder
  * This encoder will replace all unauthorized characters by underscore(_).
  */
 class SafeNameEncoder : NameEncoder {
+
+    override fun encodeObjectName(objectName: String): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun encodePathSegmentInObjectName(segment: String): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun encodeCollectionName(collectionName: String): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

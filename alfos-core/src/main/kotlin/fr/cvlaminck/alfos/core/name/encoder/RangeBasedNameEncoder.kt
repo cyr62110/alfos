@@ -2,6 +2,7 @@ package fr.cvlaminck.alfos.core.name.encoder
 
 import fr.cvlaminck.alfos.name.NameEncoder
 import fr.cvlaminck.alfos.util.range.CharacterRanges
+import fr.cvlaminck.alfos.util.replace.CharacterReplacer
 
 /**
  * Implementation of [NameEncoder] that can be configured using [CharacterRanges] to determine which characters are
@@ -14,32 +15,18 @@ import fr.cvlaminck.alfos.util.range.CharacterRanges
  * @param replacementChar Character that will be used to replace invalid characters.
  */
 class RangeBasedNameEncoder(
-        private val collectionNameAllowedRanges: CharacterRanges,
-        private val pathSegmentInObjectNameAllowedRanges: CharacterRanges,
-        private val replacementChar: Char
+        val collectionNameAllowedRanges: CharacterRanges,
+        val pathSegmentInObjectNameAllowedRanges: CharacterRanges,
+        val replacementChar: Char
 ) : NameEncoder {
 
-    /**
-     * [CharacterRanges] containing all characters that are allowed in the object name and will not be replaced
-     * by the [replacementChar].
-     */
-    private val objectNameAllowedRanges: CharacterRanges = pathSegmentInObjectNameAllowedRanges.buildUpon()
-            .addRange('/')
-            .build()
+    private val collectionNameCharacterReplacer = CharacterReplacer(collectionNameAllowedRanges, replacementChar)
+    private val pathSegmentInObjectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges, replacementChar)
+    private val objectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges.buildUpon().addRange('/').build(), replacementChar)
 
-    override fun encodeObjectName(objectName: String): String = encode(objectName, objectNameAllowedRanges, replacementChar)
+    override fun encodeObjectName(objectName: String): String = objectNameCharacterReplacer.replaceIn(objectName)
 
-    override fun encodePathSegmentInObjectName(segment: String): String = encode(segment, pathSegmentInObjectNameAllowedRanges, replacementChar)
+    override fun encodePathSegmentInObjectName(segment: String): String = pathSegmentInObjectNameCharacterReplacer.replaceIn(segment)
 
-    override fun encodeCollectionName(collectionName: String): String = encode(collectionName, collectionNameAllowedRanges, replacementChar)
-
-    internal fun encode(original: String, allowedRanges: CharacterRanges, replacementChar: Char): String {
-        val sb = StringBuilder(original.length)
-        original
-                .map { c ->
-                    if (!allowedRanges.contains(c)) replacementChar else c
-                }
-                .forEach { sb.append(it) }
-        return sb.toString()
-    }
+    override fun encodeCollectionName(collectionName: String): String = collectionNameCharacterReplacer.replaceIn(collectionName)
 }

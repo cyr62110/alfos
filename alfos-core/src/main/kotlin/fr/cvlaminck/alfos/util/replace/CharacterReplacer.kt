@@ -34,7 +34,7 @@ class CharacterReplacer(
         val sb = StringBuilder(input.length)
         input.codePoints()
                 .forEach { codePoint ->
-                    if (!allowedCharactersRanges.contains(codePoint)) {
+                    if (allowedCharactersRanges.contains(codePoint)) {
                         sb.appendCodePoint(codePoint)
                     } else {
                         sb.appendCodePoint(replacementCharCodePoint)

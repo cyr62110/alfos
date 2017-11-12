@@ -1,5 +1,6 @@
 package fr.cvlaminck.alfos.core.name.encoder
 
+import fr.cvlaminck.alfos.core.name.SafeNameCharacterRanges
 import fr.cvlaminck.alfos.name.NameEncoder
 
 /**
@@ -8,19 +9,30 @@ import fr.cvlaminck.alfos.name.NameEncoder
  * - Amazon S3 Bucket: http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
  * - Amazon S3 Object: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
  *
- * This encoder will replace all unauthorized characters by underscore(_).
+ * According to the rules , the encoder will do the following things:
+ * - replace all unauthorized characters by underscore(_).
+ * - collection name will be lower cased, trimmed to 63 characters.
+ * - object name will be trimmed to 1024 characters.
  */
 class SafeNameEncoder : NameEncoder {
 
-    override fun encodeObjectName(objectName: String): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun encodePathSegmentInObjectName(segment: String): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private val internalNameEncoder: NameEncoder = RangeBasedNameEncoder(
+            SafeNameCharacterRanges.COLLECTION_NAME_SAFE_RANGES,
+            SafeNameCharacterRanges.PATH_SEGMENT_SAFE_RANGES,
+            '-',
+            '_'
+    )
 
     override fun encodeCollectionName(collectionName: String): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val encodedCollectionName = internalNameEncoder.encodeCollectionName(collectionName.toLowerCase())
+        return if (encodedCollectionName.length > 63) encodedCollectionName.substring(0, 63) else encodedCollectionName
     }
+
+    override fun encodeObjectName(objectName: String): String {
+        val encodedObjectName = internalNameEncoder.encodeObjectName(objectName)
+        return if (encodedObjectName.length > 1024) encodedObjectName.substring(0, 1024) else encodedObjectName
+    }
+
+    override fun encodePathSegmentInObjectName(segment: String): String =
+            internalNameEncoder.encodePathSegmentInObjectName(segment)
 }

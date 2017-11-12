@@ -9,20 +9,22 @@ import fr.cvlaminck.alfos.util.replace.CharacterReplacer
  * allowed in collection/object name. All other characters will be replaced by the [replacementChar].
  *
  * @param collectionNameAllowedRanges [CharacterRanges] containing all characters that are allowed in collection
- * name and will not be replaced by the [replacementChar].
+ * name and will not be replaced by the replacement character.
  * @param pathSegmentInObjectNameAllowedRanges [CharacterRanges] containing all characters that are allowed in path
  * segment forming the object name and will not be replaced by the [replacementChar].
- * @param replacementChar Character that will be used to replace invalid characters.
+ * @param collectionNameReplacementChar Character that will be used to replace invalid characters in collection name.
+ * @param objectNameReplacementChar Character that will be used to replace invalid characters in object name.
  */
 class RangeBasedNameEncoder(
-        val collectionNameAllowedRanges: CharacterRanges,
-        val pathSegmentInObjectNameAllowedRanges: CharacterRanges,
-        val replacementChar: Char
+        collectionNameAllowedRanges: CharacterRanges,
+        pathSegmentInObjectNameAllowedRanges: CharacterRanges,
+        collectionNameReplacementChar: Char,
+        objectNameReplacementChar: Char
 ) : NameEncoder {
 
-    private val collectionNameCharacterReplacer = CharacterReplacer(collectionNameAllowedRanges, replacementChar)
-    private val pathSegmentInObjectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges, replacementChar)
-    private val objectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges.buildUpon().addRange('/').build(), replacementChar)
+    private val collectionNameCharacterReplacer = CharacterReplacer(collectionNameAllowedRanges, collectionNameReplacementChar)
+    private val pathSegmentInObjectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges, objectNameReplacementChar)
+    private val objectNameCharacterReplacer = CharacterReplacer(pathSegmentInObjectNameAllowedRanges.buildUpon().addRange('/').build(), objectNameReplacementChar)
 
     override fun encodeObjectName(objectName: String): String = objectNameCharacterReplacer.replaceIn(objectName)
 

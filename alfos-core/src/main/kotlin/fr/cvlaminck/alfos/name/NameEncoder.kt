@@ -2,7 +2,9 @@ package fr.cvlaminck.alfos.name
 
 /**
  * Provides method to encode object/collection name provided by the user.
- * The characters that are encoded and
+ *
+ * [NameEncoder] can replace characters by other but also remove character to match requirements
+ * of the provider.
  */
 interface NameEncoder {
 

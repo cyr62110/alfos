@@ -38,15 +38,50 @@ class CharacterRanges private constructor (
             private val characterRanges: MutableList<CharacterRange> = arrayListOf()
     ) {
 
+        /**
+         * Add a new [CharacterRange].
+         *
+         * @param range Range to add to the [CharacterRanges].
+         * @return this [Builder].
+         */
         fun addRange(range: CharacterRange): Builder {
             characterRanges.add(range)
             return this
         }
 
+        /**
+         * Add a new range [CharacterRange].
+         *
+         * @param startCharacter First character contained in the added [CharacterRange].
+         * @param endCharacter Last character contained in the added [CharacterRange].
+         * @return this [Builder].
+         */
         fun addRange(startCharacter: Char, endCharacter: Char): Builder = addRange(CharacterRange(startCharacter, endCharacter))
 
+        /**
+         * Add a new single [CharacterRange].
+         *
+         * @param character Single character contained in the added [CharacterRange].
+         * @return this [Builder].
+         */
         fun addRange(character: Char): Builder = addRange(CharacterRange(character))
 
+        /**
+         * Add multiple single [CharacterRange].
+         *
+         * @param characters Characters contained in the multiple [CharacterRange] added.
+         * @return this [Builder].
+         */
+        fun addRanges(vararg characters: Char): Builder {
+            characters.forEach { addRange(it) }
+            return this
+        }
+
+        /**
+         * Build a new [CharacterRanges] containing all the [CharacterRange] added to this [Builder].
+         *
+         * @return a new [CharacterRanges].
+         */
         fun build(): CharacterRanges = CharacterRanges(characterRanges)
     }
 }

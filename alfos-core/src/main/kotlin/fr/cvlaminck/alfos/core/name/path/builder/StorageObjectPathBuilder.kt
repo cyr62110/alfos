@@ -57,12 +57,12 @@ class StorageObjectPathBuilder internal constructor(
      * Remove the path segment at [index].
      *
      * @param index Index of the segment to remove.
-     * @throws IllegalArgumentException thrown if the [index] is below 0 or equals or greater than the [segmentCount].
+     * @throws IndexOutOfBoundsException thrown if the [index] is below 0 or equals or greater than the [segmentCount].
      * @return this [StorageObjectPathBuilder].
      */
     fun removePathSegmentAt(index: Int): StorageObjectPathBuilder {
         if (index < 0 || index >= segmentCount) {
-            throw IllegalArgumentException("Index ${index} is outside the range [0, ${segmentCount}[.")
+            throw IndexOutOfBoundsException("Index ${index} is outside the range [0, ${segmentCount}[.")
         }
         segments.removeAt(index)
         return this

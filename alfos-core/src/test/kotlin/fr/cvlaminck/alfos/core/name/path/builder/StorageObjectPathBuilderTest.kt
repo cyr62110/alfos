@@ -62,4 +62,18 @@ internal class StorageObjectPathBuilderTest {
             builder.removePathSegmentAt(2)
         }
     }
+
+    @Test
+    fun removeLastPathSegment() {
+        val builder = StorageObjectPathBuilder(mock(), mock())
+                .appendRawPathSegment("1")
+
+        builder.removeLastPathSegment()
+
+        assertEquals(0, builder.segmentCount)
+
+        builder.removeLastPathSegment()
+
+        assertEquals(0, builder.segmentCount)
+    }
 }

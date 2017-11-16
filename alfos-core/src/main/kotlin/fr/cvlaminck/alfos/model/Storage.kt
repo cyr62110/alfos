@@ -20,18 +20,7 @@ interface Storage {
     val operationsFactory: StorageOperationsFactory
 
     /**
-     * [NameValidator] to use to check that object/collection name are valid for this storage.
+     * Provider on which our objects are stored.
      */
-    val nameValidator: NameValidator
-
-    /**
-     * Scheme used in uri to access the storage of this provider.
-     */
-    val scheme: String
-
-    /**
-     * Name of the provider on which this storage is hosted. <br />
-     * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
-     */
-    val providerName: String
+    val provider: StorageServiceProvider
 }

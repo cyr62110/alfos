@@ -1,14 +1,15 @@
 package fr.cvlaminck.alfos.core
 
+import fr.cvlaminck.alfos.core.name.encoder.DummyNameEncoder
 import fr.cvlaminck.alfos.core.name.encoder.SafeNameEncoder
 import fr.cvlaminck.alfos.core.name.path.builder.StorageObjectPathBuilder
 import fr.cvlaminck.alfos.core.name.validator.SafeNameValidator
 
 /**
- * 
+ * TODO
  */
-class StorageObjectNameManager(
-        private val storageRegistry: StorageRegistry
+class StorageObjectNameFactory(
+        private val registry: StorageRegistry
 ) {
 
     /**
@@ -24,7 +25,8 @@ class StorageObjectNameManager(
      * @return a new [StorageObjectPathBuilder] configured for the given provider.
      */
     fun newPathBuilder(providerName: String): StorageObjectPathBuilder {
-        TODO("not implemented")
+        val provider = registry.findProviderByName(providerName)
+        return StorageObjectPathBuilder(provider.nameValidator, DummyNameEncoder())
     }
 
     /**

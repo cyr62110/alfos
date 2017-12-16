@@ -48,27 +48,20 @@ internal class StorageObjectUriBuilderTest {
 
     @Test
     fun withObjectPath() {
-        val path = mock<StorageObjectPath>()
-        val pathBuilder = mock<StorageObjectPathBuilder> {
-            on { it.build() }.thenReturn(path)
-        }
-        whenever(path.buildUpon()).thenReturn(pathBuilder)
+        val path = StorageObjectPath(mock(), mock(), listOf("testpath"));
 
         val builder = StorageObjectUriBuilder(mock(), mock(), "testscheme", "testcollection")
                 .withObjectPath(path)
 
         val uri = builder.build()
-        assertSame(path, uri.objectPath)
+        assertEquals(path, uri.objectPath)
     }
 
     @Test
     fun withoutObjectName() {
-        val path = mock<StorageObjectPath>()
-        val pathBuilder = mock<StorageObjectPathBuilder> {
-            on { it.build() }.thenReturn(path)
-        }
+        val path = StorageObjectPath(mock(), mock(), listOf("testpath"))
 
-        val builder = StorageObjectUriBuilder(mock(), mock(), "testscheme", "testcollection", pathBuilder)
+        val builder = StorageObjectUriBuilder(mock(), mock(), "testscheme", "testcollection", path.buildUpon())
                 .withoutObjectName()
 
         val uri = builder.build()

@@ -16,11 +16,22 @@ import fr.cvlaminck.alfos.name.NameValidator
  * - A/test.txt -> 'test.txt' in 'A' directory at the root.
  * - A/B/test.txt -> 'test.txt' in 'A' directory in 'B' directory at the root.
  */
-class StorageObjectPath internal constructor(
+open class StorageObjectPath internal constructor(
         val nameValidator: NameValidator,
         val nameEncoder: NameEncoder,
         val segments: List<String>
 ) {
 
     fun buildUpon(): StorageObjectPathBuilder = StorageObjectPathBuilder(nameValidator, nameEncoder, segments)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is StorageObjectPath) return false
+
+        if (segments != other.segments) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int = segments.hashCode()
 }

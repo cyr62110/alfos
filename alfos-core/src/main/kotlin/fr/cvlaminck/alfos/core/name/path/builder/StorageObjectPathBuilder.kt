@@ -7,8 +7,7 @@ import fr.cvlaminck.alfos.name.NameValidator
 /**
  * Builder class that provides method allowing to easily manipulate object name as virtual path.
  *
- * @param nameValidator
- * @param nameEncoder
+ * This builder is not thread-safe.
  */
 class StorageObjectPathBuilder internal constructor(
         private val nameValidator: NameValidator,

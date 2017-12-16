@@ -21,5 +21,5 @@ interface StorageServiceProvider {
      * Name of this provider. <br />
      * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
      */
-    val providerName: String
+    val name: String
 }

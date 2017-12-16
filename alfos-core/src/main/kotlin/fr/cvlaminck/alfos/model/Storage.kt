@@ -1,7 +1,6 @@
 package fr.cvlaminck.alfos.model
 
 import fr.cvlaminck.alfos.model.auth.StorageCredentials
-import fr.cvlaminck.alfos.name.NameValidator
 import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 
 /**

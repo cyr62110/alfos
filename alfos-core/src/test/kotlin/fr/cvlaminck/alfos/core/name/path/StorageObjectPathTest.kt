@@ -27,4 +27,16 @@ internal class StorageObjectPathTest {
                 StorageObjectPath(mock(), mock(), listOf("testpath2", "testpath1"))
         )
     }
+
+    @Test
+    fun toString_() {
+        assertEquals(
+                "testpath1",
+                StorageObjectPath(mock(), mock(), listOf("testpath1")).toString()
+        )
+        assertEquals(
+                "testpath1/testpath2",
+                StorageObjectPath(mock(), mock(), listOf("testpath1", "testpath2")).toString()
+        )
+    }
 }

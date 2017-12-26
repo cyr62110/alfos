@@ -19,10 +19,19 @@ import fr.cvlaminck.alfos.name.NameValidator
 open class StorageObjectPath internal constructor(
         val nameValidator: NameValidator,
         val nameEncoder: NameEncoder,
-        val segments: List<String>
+        segments: List<String>
 ) {
+    val segments: List<String> = listOf(*segments.toTypedArray())
 
     fun buildUpon(): StorageObjectPathBuilder = StorageObjectPathBuilder(nameValidator, nameEncoder, segments)
+
+    override fun toString(): String =
+            segments.foldIndexed(StringBuilder()) { index, acc, segment ->
+                if (index > 0) {
+                    acc.append(PATH_SEPARATOR)
+                }
+                acc.append(segment)
+            }.toString()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -34,4 +43,8 @@ open class StorageObjectPath internal constructor(
     }
 
     override fun hashCode(): Int = segments.hashCode()
+
+    companion object {
+        val PATH_SEPARATOR = '/'
+    }
 }

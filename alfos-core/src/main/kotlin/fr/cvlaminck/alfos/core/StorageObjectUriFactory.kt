@@ -2,7 +2,9 @@ package fr.cvlaminck.alfos.core
 
 import fr.cvlaminck.alfos.core.name.encoder.DummyNameEncoder
 import fr.cvlaminck.alfos.core.name.encoder.SafeNameEncoder
+import fr.cvlaminck.alfos.core.name.path.StorageObjectUri
 import fr.cvlaminck.alfos.core.name.path.builder.StorageObjectUriBuilder
+import fr.cvlaminck.alfos.core.name.path.parser.StorageObjectUriParser
 import fr.cvlaminck.alfos.core.name.validator.SafeNameValidator
 
 /**
@@ -38,4 +40,17 @@ class StorageObjectUriFactory(
      */
     fun newSafeUriBuilder(): StorageObjectUriBuilder =
             StorageObjectUriBuilder(SafeNameValidator(), SafeNameEncoder())
+
+    /**
+     * Parse the provided raw string and returns a valid [StorageObjectUri].
+     *
+     * A provider handling the scheme of the uri must have been registered into the [storageRegistry]
+     * before parsing. This will ensure that the uri is valid according to the rules of the provider
+     * matching the scheme.
+     *
+     * @param uri Raw string to parse into a [StorageObjectUri].
+     * @return a valid [StorageObjectUri].
+     */
+    fun parse(uri: String): StorageObjectUri =
+            StorageObjectUriParser(registry, DummyNameEncoder()).parse(uri)
 }

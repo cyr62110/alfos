@@ -2,7 +2,9 @@ package fr.cvlaminck.alfos.core
 
 import fr.cvlaminck.alfos.core.name.encoder.DummyNameEncoder
 import fr.cvlaminck.alfos.core.name.encoder.SafeNameEncoder
+import fr.cvlaminck.alfos.core.name.path.StorageObjectPath
 import fr.cvlaminck.alfos.core.name.path.builder.StorageObjectPathBuilder
+import fr.cvlaminck.alfos.core.name.path.parser.StorageObjectPathParser
 import fr.cvlaminck.alfos.core.name.validator.SafeNameValidator
 
 /**
@@ -39,4 +41,18 @@ class StorageObjectNameFactory(
      */
     fun newSafePathBuilder(): StorageObjectPathBuilder =
             StorageObjectPathBuilder(SafeNameValidator(), SafeNameEncoder())
+
+    /**
+     * Parse the provided raw string into a valid [StorageObjectPath].
+     *
+     * The path will be validated against the rule of the provider with the given [providerName].
+     *
+     * @param providerName Name of the provider which will validate the path.
+     * @param path Raw string to parse into a [StorageObjectPath].
+     * @return a valid [StorageObjectPath].
+     */
+    fun parse(providerName: String, path: String): StorageObjectPath {
+        val provider = registry.findProviderByName(providerName)
+        return StorageObjectPathParser(provider.nameValidator, DummyNameEncoder()).parse(path)
+    }
 }

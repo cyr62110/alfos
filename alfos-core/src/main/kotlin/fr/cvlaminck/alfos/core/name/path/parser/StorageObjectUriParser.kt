@@ -7,11 +7,29 @@ import fr.cvlaminck.alfos.exception.InvalidUriException
 import fr.cvlaminck.alfos.model.StorageServiceProvider
 import fr.cvlaminck.alfos.name.NameEncoder
 
+/**
+ * Utility class allowing to parse raw string into [StorageObjectUri].
+ * Uri parsed by this util are validated against the rule of the provider matching the scheme
+ * of the uri. Path segment will also be encoded using the provided [nameEncoder].
+ *
+ * @constructor
+ * @param storageRegistry
+ * @param nameEncoder [NameEncoder] to use to encode the different uri parts before validation.
+ */
 internal class StorageObjectUriParser (
         private val storageRegistry: StorageRegistry,
         private val nameEncoder: NameEncoder
 ) {
 
+    /**
+     * Parse the provided raw string into a valid [StorageObjectUri].
+     *
+     * A provider handling the scheme of the uri must have been registered into the [storageRegistry]
+     * before parsing.
+     *
+     * @param sUri Raw string to parse into a valid [StorageObjectUri].
+     * @return a valid [StorageObjectUri].
+     */
     fun parse(sUri: String): StorageObjectUri {
         val provider = parseProviderFromUri(sUri)
         val collection = parseCollectionFromUri(sUri, provider)

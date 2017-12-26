@@ -17,7 +17,7 @@ internal class StorageObjectPathParserTest {
         val encoder = spy(DummyNameEncoder())
         val validator = mock<NameValidator>()
 
-        val parser = StorageObjectPathParser(validator, encoder, '/')
+        val parser = StorageObjectPathParser(validator, encoder)
 
         assertEquals(
                 parser.parse("testpath1"),

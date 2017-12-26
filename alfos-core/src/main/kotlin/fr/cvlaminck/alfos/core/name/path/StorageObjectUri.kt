@@ -1,5 +1,6 @@
 package fr.cvlaminck.alfos.core.name.path
 
+import fr.cvlaminck.alfos.core.name.encoder.DummyNameEncoder
 import fr.cvlaminck.alfos.core.name.path.builder.StorageObjectUriBuilder
 import fr.cvlaminck.alfos.model.Storage
 import fr.cvlaminck.alfos.model.StorageServiceProvider
@@ -33,4 +34,8 @@ class StorageObjectUri internal constructor(
             providerScheme,
             collectionName,
             objectPath?.buildUpon())
+
+    companion object {
+        val SCHEME_SEPARATOR = "://"
+    }
 }

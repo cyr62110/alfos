@@ -5,7 +5,7 @@ import fr.cvlaminck.alfos.name.NameEncoder
 /**
  * Implementation of [NameEncoder] that does not modify the input.
  */
-class DummyNameEncoder : NameEncoder {
+open class DummyNameEncoder : NameEncoder {
 
     override fun encodeObjectName(objectName: String): String = objectName
 

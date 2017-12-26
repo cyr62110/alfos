@@ -5,19 +5,38 @@ import fr.cvlaminck.alfos.core.name.path.builder.StorageObjectPathBuilder
 import fr.cvlaminck.alfos.name.NameEncoder
 import fr.cvlaminck.alfos.name.NameValidator
 
-class StorageObjectPathParser(
-        val nameValidator: NameValidator,
-        val nameEncoder: NameEncoder,
-        val pathSegmentSeparator: Char
+/**
+ * Utility class providing method to parse raw string into [StorageObjectPath].
+ * It will use a [NameValidator] and a [NameEncoder] to ensure the path is valid and can
+ * be used as object name by providers.
+ *
+ * @constructor
+ * @param nameValidator [NameValidator] used to validate if the parsed path is valid.
+ * @param nameEncoder [NameEncoder] to use to encode path segment to ensure they are valid.
+ */
+internal class StorageObjectPathParser(
+        private val nameValidator: NameValidator,
+        private val nameEncoder: NameEncoder
 ) {
 
-    fun parse(sPath: String): StorageObjectPath {
+    /**
+     * Parse a raw string into a [StorageObjectPath].
+     * The path will be encoded by the [nameEncoder] and validated using the [nameValidator].
+     *
+     * @param sPath Raw string to parse.
+     * @param startIndex Index of first character of the string to be considered part of the path.
+     * @return a valid [StorageObjectPath].
+     */
+    fun parse(
+            sPath: String,
+            startIndex: Int = 0
+    ): StorageObjectPath {
         val pathBuilder = StorageObjectPathBuilder(nameValidator, nameEncoder)
 
-        var currentIndex = 0;
-        var indexOfSeparator = -1;
+        var currentIndex = startIndex
+        var indexOfSeparator = -1
         do {
-            indexOfSeparator = sPath.indexOf(pathSegmentSeparator, currentIndex)
+            indexOfSeparator = sPath.indexOf(StorageObjectPath.PATH_SEPARATOR, currentIndex)
             if (indexOfSeparator == -1) {
                 indexOfSeparator = sPath.length
             }

@@ -13,7 +13,10 @@ internal class StorageRegistryTest {
     fun providers() {
         val registry = testRegistry
         
-        assertEquals(listOf(testProvider2, testProvider1), registry.providers)
+        assertEquals(
+                listOf(testProvider1, testProvider2).sortedBy { it.name },
+                registry.providers.sortedBy { it.name }
+        )
     }
 
     @Test

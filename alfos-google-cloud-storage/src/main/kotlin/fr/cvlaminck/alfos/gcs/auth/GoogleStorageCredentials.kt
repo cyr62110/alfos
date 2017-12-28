@@ -1,4 +1,4 @@
-package fr.cvlaminck.alfos.gcs
+package fr.cvlaminck.alfos.gcs.auth
 
 import fr.cvlaminck.alfos.model.auth.StorageCredentials
 

@@ -1,5 +1,6 @@
 package fr.cvlaminck.alfos.gcs
 
+import fr.cvlaminck.alfos.gcs.auth.GoogleStorageCredentials
 import fr.cvlaminck.alfos.gcs.operation.GoogleStorageOperationsFactory
 import fr.cvlaminck.alfos.model.Storage
 import fr.cvlaminck.alfos.model.StorageServiceProvider

@@ -11,7 +11,7 @@ interface Storage {
     /**
      * Credentials that must be used to authenticate your account on the provider.
      */
-    var credentials: StorageCredentials
+    val credentials: StorageCredentials
 
     /**
      *

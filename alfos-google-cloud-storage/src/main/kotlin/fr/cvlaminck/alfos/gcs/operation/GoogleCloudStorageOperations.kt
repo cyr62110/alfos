@@ -1,15 +1,17 @@
 package fr.cvlaminck.alfos.gcs.operation
 
-import fr.cvlaminck.alfos.model.Storage
+import com.google.cloud.storage.Storage
+import fr.cvlaminck.alfos.gcs.GoogleCloudStorage
 import fr.cvlaminck.alfos.model.StorageCollection
 import fr.cvlaminck.alfos.operation.StorageOperations
 import io.reactivex.Flowable
 
-class GoogleStorageOperations (
-        override val storage: Storage
+class GoogleCloudStorageOperations internal constructor(
+        override val storage: GoogleCloudStorage,
+        private val googleStorage: Storage
 ) : StorageOperations {
 
     override fun listCollections(): Flowable<StorageCollection> {
-
+        TODO("Implements") // FIXME
     }
 }

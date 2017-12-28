@@ -3,9 +3,9 @@ package fr.cvlaminck.alfos.gcs
 import fr.cvlaminck.alfos.model.StorageServiceProvider
 import fr.cvlaminck.alfos.name.NameValidator
 
-object GoogleProvider : StorageServiceProvider {
+object GoogleCloudStorageProvider : StorageServiceProvider {
 
-    override val name: String = "Google cloud storage"
+    override val name: String = "Google Cloud Storage"
 
     override val scheme: String = "gcs"
 

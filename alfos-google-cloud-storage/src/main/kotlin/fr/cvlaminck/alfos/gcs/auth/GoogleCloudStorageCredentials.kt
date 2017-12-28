@@ -13,7 +13,7 @@ import fr.cvlaminck.alfos.model.auth.StorageCredentials
  * @param credentials Google [Credentials] to use to authenticate to GCS.
  */
 class GoogleCloudStorageCredentials(
-        credentials: Credentials
+        internal val credentials: Credentials
 ) : StorageCredentials {
 
     override val provider: StorageServiceProvider = GoogleCloudStorageProvider

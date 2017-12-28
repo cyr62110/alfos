@@ -12,9 +12,7 @@ class GoogleCloudStorageOperationsFactory internal constructor(
         private val googleStorage: Storage
 ) : StorageOperationsFactory {
 
-    override fun getStorageOperations(): StorageOperations {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getStorageOperations(): StorageOperations = GoogleCloudStorageOperations(storage, googleStorage)
 
     override fun getStorageCollectionOperations(collectionName: String): StorageCollectionOperations {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

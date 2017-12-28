@@ -11,25 +11,24 @@ import fr.cvlaminck.alfos.operation.StorageOperationsFactory
  * Implementation of Storage allowing to access the Google Cloud storage associated to a Google Cloud project.
  *
  * @constructor
- * @param applicationName Name of this application.
  * @param projectId Id of the project to which is attached the Google cloud storage we will access using this storage.
  * @param credentials Credentials of an user having access to the project.
  */
 class GoogleCloudStorage(
-        val applicationName: String,
         val projectId: String,
         override val credentials: GoogleCloudStorageCredentials
 ) : Storage {
 
-    val storage: com.google.cloud.storage.Storage = buildStorage()
+    private val storageOptions: StorageOptions by lazy {
+        StorageOptions.newBuilder()
+                .setProjectId(projectId)
+                .setCredentials(credentials.credentials)
+                .build()
+    }
 
-    override val operationsFactory: StorageOperationsFactory = GoogleCloudStorageOperationsFactory(this)
+    override val operationsFactory: StorageOperationsFactory = GoogleCloudStorageOperationsFactory(this, storageOptions.service)
 
     override val provider: StorageServiceProvider = GoogleCloudStorageProvider
-
-    private fun buildStorage(): com.google.cloud.storage.Storage {
-        TODO("Implements")
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -8,7 +8,7 @@ import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 interface Storage {
 
     /**
-     *
+     * Factory class that constructs classes providing operations on storage, collections and objects.
      */
     val operationsFactory: StorageOperationsFactory
 

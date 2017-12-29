@@ -3,11 +3,17 @@ package fr.cvlaminck.alfos.model
 /**
  * Provide all information on an object stored in a collection on a storage.
  */
-interface StorageObject {
-
-    /**
-     * Name of the object.
-     */
-    val name: String
-
-}
+data class StorageObject(
+        /**
+         * Storage containing this object,
+         */
+        val storage: Storage,
+        /**
+         * Name of the collection containing this object.
+         */
+        val collectionName: String,
+        /**
+         * Name of the object.
+         */
+        val name: String
+)

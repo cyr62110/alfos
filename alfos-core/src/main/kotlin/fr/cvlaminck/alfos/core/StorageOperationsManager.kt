@@ -16,9 +16,11 @@ class StorageOperationsManager(
 
     fun getStorageOperations(storage: Storage): Single<StorageOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageOperations() }
+            .map { StorageOperations(storage, it) }
 
     fun getCollectionOperations(storage: Storage, collectionName: String): Single<StorageCollectionOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageCollectionOperations(collectionName) }
+            .map { StorageCollectionOperations(storage, collectionName, it) }
 
     fun getCollectionOperations(uri: StorageObjectUri): Single<StorageCollectionOperations>
             = findPotentialStorageMatchingUri(uri)
@@ -31,6 +33,7 @@ class StorageOperationsManager(
 
     fun getObjectOperations(storage: Storage, collectionName: String, objectName: String): Single<StorageObjectOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageObjectOperations(collectionName, objectName) }
+            .map { StorageObjectOperations(storage, collectionName, objectName, it) }
 
     fun getObjectOperations(uri: StorageObjectUri): Single<StorageObjectOperations>
             = findPotentialStorageMatchingUri(uri)

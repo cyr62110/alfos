@@ -6,13 +6,13 @@ package fr.cvlaminck.alfos.model
 interface StorageServiceProvider {
 
     /**
-     * Scheme used in uri to access storages of this provider.
-     */
-    val scheme: String
-
-    /**
      * Name of this provider. <br />
      * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
      */
-    val providerName: String
+    val name: String
+
+    /**
+     * Scheme used in uri to access storages of this provider.
+     */
+    val scheme: String
 }

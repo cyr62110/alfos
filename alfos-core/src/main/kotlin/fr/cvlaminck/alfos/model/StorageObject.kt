@@ -40,4 +40,8 @@ class StorageObject(
         result = 31 * result + name.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "${name} <${collectionName}@${storage.name}> [${storage.provider.name}]"
+    }
 }

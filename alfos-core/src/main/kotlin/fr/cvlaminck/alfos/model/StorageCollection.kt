@@ -22,7 +22,7 @@ class StorageCollection(
         // by third party.
         if (storage.name != other.storage.name) return false
         if (storage.provider.name != other.storage.provider.name) return false
-        
+
         if (name != other.name) return false
 
         return true
@@ -33,5 +33,9 @@ class StorageCollection(
         result = 31 * result + storage.provider.name.hashCode()
         result = 31 * result + name.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return "${name} <${storage.name}> [${storage.provider.name}]"
     }
 }

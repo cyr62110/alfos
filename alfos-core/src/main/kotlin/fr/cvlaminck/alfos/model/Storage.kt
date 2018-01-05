@@ -1,6 +1,5 @@
 package fr.cvlaminck.alfos.model
 
-import fr.cvlaminck.alfos.model.auth.StorageCredentials
 import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 
 /**
@@ -9,12 +8,12 @@ import fr.cvlaminck.alfos.operation.StorageOperationsFactory
 interface Storage {
 
     /**
-     * Credentials that must be used to authenticate your account on the provider.
+     * Name of this [Storage].
      */
-    val credentials: StorageCredentials
+    val name: String
 
     /**
-     *
+     * Factory class that constructs classes providing operations on storage, collections and objects.
      */
     val operationsFactory: StorageOperationsFactory
 

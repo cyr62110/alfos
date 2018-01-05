@@ -8,6 +8,12 @@ import fr.cvlaminck.alfos.name.NameValidator
 interface StorageServiceProvider {
 
     /**
+     * Name of this provider. <br />
+     * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
+     */
+    val name: String
+
+    /**
      * Scheme used in uri to access storages of this provider.
      */
     val scheme: String
@@ -16,10 +22,4 @@ interface StorageServiceProvider {
      * [NameValidator] to use to check that object/collection name are valid for this storage.
      */
     val nameValidator: NameValidator
-
-    /**
-     * Name of this provider. <br />
-     * ex: GoogleCloudStorage, AmazonS3, Ceph, ...
-     */
-    val name: String
 }

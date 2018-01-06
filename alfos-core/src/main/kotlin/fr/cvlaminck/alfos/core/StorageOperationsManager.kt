@@ -11,9 +11,10 @@ import fr.cvlaminck.alfos.operation.StorageOperations
 import io.reactivex.Single
 
 class StorageOperationsManager(
-        private val registry: StorageRegistry,
-        private val uriFactory: StorageObjectUriFactory
+        private val registry: StorageRegistry
 ) {
+
+    private val uriFactory: StorageObjectUriFactory = StorageObjectUriFactory(registry)
 
     fun getStorageOperations(storage: Storage): Single<StorageOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageOperations() }

@@ -8,21 +8,20 @@ import fr.cvlaminck.alfos.model.StorageServiceProvider
  * TODO
  */
 // FIXME: Make it thread-safe
-// FIXME: How to mock without leaving everything open ?
-open class StorageRegistry {
+class StorageRegistry {
 
     private val _storages: MutableSet<Storage> = hashSetOf()
 
     /**
      * Collection of all storages that have been registered in this registry.
      */
-    open val storages: Set<Storage> = _storages
+    val storages: Set<Storage> = _storages
 
     /**
      * Collection of all providers that have at least a storage registered in
      * this registry.
      */
-    open val providers: Collection<StorageServiceProvider>
+    val providers: Collection<StorageServiceProvider>
         get() = _storages
                 .map { it.provider }
                 .distinctBy { it.name }
@@ -34,7 +33,7 @@ open class StorageRegistry {
      * @return the [StorageServiceProvider] with the given [name].
      * @throws UnknownProviderException thrown if no provider with the given [name] has been registered.
      */
-    open fun findProviderByName(name: String): StorageServiceProvider = _storages
+    fun findProviderByName(name: String): StorageServiceProvider = _storages
             .map { it.provider }
             .firstOrNull { it.name == name } ?: throw UnknownProviderException.createWithName(name)
 
@@ -45,7 +44,7 @@ open class StorageRegistry {
      * @return the [StorageServiceProvider] with the given [scheme].
      * @throws UnknownProviderException thrown if no provider with the given [scheme] has been registered.
      */
-    open fun findProviderByScheme(scheme: String): StorageServiceProvider = _storages
+    fun findProviderByScheme(scheme: String): StorageServiceProvider = _storages
             .map { it.provider }
             .firstOrNull { it.scheme == scheme } ?: throw UnknownProviderException.createWithScheme(scheme)
 
@@ -57,7 +56,7 @@ open class StorageRegistry {
      * @return the [StorageServiceProvider] with the given name or scheme.
      * @throws UnknownProviderException thrown if no provider with the given name or scheme has been registered.
      */
-    open fun findProviderByNameOrScheme(nameOrScheme: String): StorageServiceProvider {
+    fun findProviderByNameOrScheme(nameOrScheme: String): StorageServiceProvider {
         try {
             return findProviderByScheme(nameOrScheme)
         } catch (e : UnknownProviderException) {
@@ -71,10 +70,10 @@ open class StorageRegistry {
      * @param providerScheme Scheme of the provider to find storage provided by.
      * @return a list of [Storage].
      */
-    open fun findStoragesByProviderScheme(providerScheme: String): List<Storage> = _storages
+    fun findStoragesByProviderScheme(providerScheme: String): List<Storage> = _storages
             .filter { it.provider.scheme == providerScheme }
 
-    open fun registerStorage(storage: Storage) = synchronized(this) {
+    fun registerStorage(storage: Storage) = synchronized(this) {
         _storages.add(storage)
     }
 }

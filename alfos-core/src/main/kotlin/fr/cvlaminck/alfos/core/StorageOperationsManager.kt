@@ -10,16 +10,35 @@ import fr.cvlaminck.alfos.operation.StorageObjectOperations
 import fr.cvlaminck.alfos.operation.StorageOperations
 import io.reactivex.Single
 
+/**
+ * Allows to access to operations on storages, collections and objects.
+ *
+ * @constructor
+ * @param registry Registry where are registered all [Storage] that we will operate on.
+ */
 class StorageOperationsManager(
         private val registry: StorageRegistry
 ) {
 
     private val uriFactory: StorageObjectUriFactory = StorageObjectUriFactory(registry)
 
+    /**
+     * Provide a [StorageOperations] configured to operate on the provided [storage].
+     *
+     * @param storage [Storage] on which the operations will be executed.
+     * @return a [Single] emitting a configured [StorageOperations].
+     */
     fun getStorageOperations(storage: Storage): Single<StorageOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageOperations() }
             .map { StorageOperations(storage, it) }
 
+    /**
+     * Provide a [StorageCollectionOperations] configured to operate on the designed collection.
+     *
+     * @param storage [Storage] containing the collection.
+     * @param collectionName Name of the collection on which the operations will be executed.
+     * @return a [Single] emitting a configured [StorageCollectionOperations].
+     */
     fun getCollectionOperations(storage: Storage, collectionName: String): Single<StorageCollectionOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageCollectionOperations(collectionName) }
             .map { StorageCollectionOperations(storage, collectionName, it) }
@@ -36,6 +55,14 @@ class StorageOperationsManager(
             .map { uriFactory.parse(it) }
             .flatMap { getCollectionOperations(it) }
 
+    /**
+     * Provide a [StorageObjectOperations] configured to operate on the designed object.
+     *
+     * @param storage [Storage] containing the collection.
+     * @param collectionName Name of the collection containing the object.
+     * @param objectName Name of the object on which the operations will be executed.
+     * @return a [Single] emitting a configured [StorageObjectOperations].
+     */
     fun getObjectOperations(storage: Storage, collectionName: String, objectName: String): Single<StorageObjectOperations>
             = Single.fromCallable { storage.operationsFactory.getStorageObjectOperations(collectionName, objectName) }
             .map { StorageObjectOperations(storage, collectionName, objectName, it) }

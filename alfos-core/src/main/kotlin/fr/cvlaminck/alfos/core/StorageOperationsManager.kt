@@ -12,15 +12,19 @@ import io.reactivex.Single
 
 /**
  * Allows to access to operations on storages, collections and objects.
- *
- * @constructor
- * @param registry Registry where are registered all [Storage] that we will operate on.
  */
-class StorageOperationsManager(
-        private val registry: StorageRegistry
+class StorageOperationsManager internal constructor(
+        private val registry: StorageRegistry,
+        private val uriFactory: StorageObjectUriFactory
 ) {
 
-    private val uriFactory: StorageObjectUriFactory = StorageObjectUriFactory(registry)
+    /**
+     * Construct a [StorageOperationsManager] that will be able to provide operations that will work on [Storage]
+     * registered on the provided [registry].
+     *
+     * @param registry Registry where are registered all [Storage] that we will operate on.
+     */
+    constructor(registry: StorageRegistry) : this(registry, StorageObjectUriFactory(registry))
 
     /**
      * Provide a [StorageOperations] configured to operate on the provided [storage].

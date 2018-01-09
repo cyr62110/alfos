@@ -11,9 +11,10 @@ import fr.cvlaminck.alfos.core.name.validator.SafeNameValidator
  * TODO
  */
 class StorageObjectUriFactory(
-        private val registry: StorageRegistry,
-        private val objectNameFactory: StorageObjectNameFactory
+        private val registry: StorageRegistry
 ) {
+
+    private val objectNameFactory: StorageObjectNameFactory = StorageObjectNameFactory(registry)
 
     /**
      * Returns a new [StorageObjectUriBuilder] that will validate the uri according to the rules of the provider

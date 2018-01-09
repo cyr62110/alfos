@@ -35,6 +35,7 @@ class StorageCollection(
         return result
     }
 
+    @Suppress("RemoveCurlyBracesFromTemplate")
     override fun toString(): String {
         return "${name} <${storage.name}> [${storage.provider.name}]"
     }

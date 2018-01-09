@@ -3,10 +3,11 @@ package fr.cvlaminck.alfos.gcs
 import com.google.auth.Credentials
 import com.google.cloud.storage.StorageOptions
 import fr.cvlaminck.alfos.gcs.mapper.GoogleCloudStorageCollectionMapper
+import fr.cvlaminck.alfos.gcs.mapper.GoogleCloudStorageObjectMapper
 import fr.cvlaminck.alfos.gcs.operation.GoogleCloudStorageOperationsFactory
 import fr.cvlaminck.alfos.model.Storage
 import fr.cvlaminck.alfos.model.StorageServiceProvider
-import fr.cvlaminck.alfos.operation.StorageOperationsFactory
+import fr.cvlaminck.alfos.operation.raw.RawStorageOperationsFactory
 
 /**
  * Implementation of Storage allowing to access the Google Cloud storage associated to a Google Cloud project.
@@ -27,11 +28,13 @@ class GoogleCloudStorage(
                 .build()
     }
 
-    internal val collectionMapper: GoogleCloudStorageCollectionMapper = GoogleCloudStorageCollectionMapper(this)
+    internal val collectionMapper = GoogleCloudStorageCollectionMapper(this)
+
+    internal val objectMapper = GoogleCloudStorageObjectMapper(this)
 
     override val name: String = projectId
 
-    override val operationsFactory: StorageOperationsFactory = GoogleCloudStorageOperationsFactory(this, storageOptions.service)
+    override val operationsFactory: RawStorageOperationsFactory = GoogleCloudStorageOperationsFactory(this, storageOptions.service)
 
     override val provider: StorageServiceProvider = GoogleCloudStorageProvider
 

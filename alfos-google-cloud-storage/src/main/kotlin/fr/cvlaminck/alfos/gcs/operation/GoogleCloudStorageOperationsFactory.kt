@@ -2,23 +2,23 @@ package fr.cvlaminck.alfos.gcs.operation
 
 import com.google.cloud.storage.Storage
 import fr.cvlaminck.alfos.gcs.GoogleCloudStorage
-import fr.cvlaminck.alfos.operation.StorageCollectionOperations
-import fr.cvlaminck.alfos.operation.StorageObjectOperations
-import fr.cvlaminck.alfos.operation.StorageOperations
-import fr.cvlaminck.alfos.operation.StorageOperationsFactory
+import fr.cvlaminck.alfos.operation.raw.RawStorageCollectionOperations
+import fr.cvlaminck.alfos.operation.raw.RawStorageObjectOperations
+import fr.cvlaminck.alfos.operation.raw.RawStorageOperations
+import fr.cvlaminck.alfos.operation.raw.RawStorageOperationsFactory
 
-class GoogleCloudStorageOperationsFactory internal constructor(
-        override val storage: GoogleCloudStorage,
+internal class GoogleCloudStorageOperationsFactory(
+        val storage: GoogleCloudStorage,
         private val googleStorage: Storage
-) : StorageOperationsFactory {
+) : RawStorageOperationsFactory {
 
-    override fun getStorageOperations(): StorageOperations = GoogleCloudStorageOperations(storage, googleStorage)
+    override fun getStorageOperations(): RawStorageOperations
+            = GoogleCloudStorageOperations(storage, googleStorage)
 
-    override fun getStorageCollectionOperations(collectionName: String): StorageCollectionOperations {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getStorageCollectionOperations(collectionName: String): RawStorageCollectionOperations
+            = GoogleClougStorageCollectionOperations(collectionName, storage, googleStorage)
 
-    override fun getStorageObjectOperations(collectionName: String, objectName: String): StorageObjectOperations {
+    override fun getStorageObjectOperations(collectionName: String, objectName: String): RawStorageObjectOperations {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

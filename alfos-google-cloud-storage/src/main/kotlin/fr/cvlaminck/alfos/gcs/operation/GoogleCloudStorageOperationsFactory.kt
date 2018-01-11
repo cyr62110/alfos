@@ -18,7 +18,6 @@ internal class GoogleCloudStorageOperationsFactory(
     override fun getStorageCollectionOperations(collectionName: String): RawStorageCollectionOperations
             = GoogleClougStorageCollectionOperations(collectionName, storage, googleStorage)
 
-    override fun getStorageObjectOperations(collectionName: String, objectName: String): RawStorageObjectOperations {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getStorageObjectOperations(collectionName: String, objectName: String): RawStorageObjectOperations
+            = GoogleCloudStorageObjectOperations(collectionName, objectName, storage, googleStorage)
 }

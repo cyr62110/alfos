@@ -15,6 +15,7 @@ interface RawStorageOperations {
 
     /**
      * List the collections contained in the storage.
+     *
      * @return a [Flowable] emitting the collections in the storage.
      */
     fun listCollections(): Flowable<StorageCollection>

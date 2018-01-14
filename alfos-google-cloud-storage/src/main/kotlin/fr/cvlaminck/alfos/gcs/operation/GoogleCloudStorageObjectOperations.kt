@@ -1,5 +1,6 @@
 package fr.cvlaminck.alfos.gcs.operation
 
+import com.google.cloud.ReadChannel
 import com.google.cloud.storage.Blob
 import com.google.cloud.storage.Storage
 import fr.cvlaminck.alfos.gcs.GoogleCloudStorage
@@ -9,6 +10,7 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import java.io.InputStream
 import java.io.OutputStream
+import java.nio.channels.Channels
 
 internal class GoogleCloudStorageObjectOperations(
         private val collectionName: String,
@@ -27,9 +29,14 @@ internal class GoogleCloudStorageObjectOperations(
             Storage.BlobGetOption.fields(*Storage.BlobField.values()) // FIXME filter only field that are usefull
     )
 
-    override fun download(): Single<InputStream> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun download(): Single<InputStream>
+            = Single.fromCallable(::getContentReadChannel)
+            .map(Channels::newInputStream)
+
+    private fun getContentReadChannel(): ReadChannel = googleStorage.reader(
+            collectionName,
+            objectName
+    )
 
     override fun upload(): Single<OutputStream> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

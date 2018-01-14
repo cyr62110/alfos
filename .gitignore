@@ -1,9 +1,10 @@
 # IDEA
 \.idea
 *.iml
+out/
 
 # Gradle
-build
+build/
 /\.gradle
 
 # Java

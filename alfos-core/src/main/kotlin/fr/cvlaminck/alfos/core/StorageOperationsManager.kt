@@ -47,7 +47,7 @@ class StorageOperationsManager internal constructor(
             = Single.fromCallable { storage.operationsFactory.getStorageCollectionOperations(collectionName) }
             .map { StorageCollectionOperations(storage, collectionName, it) }
 
-    fun getCollectionOperation(storageCollection: StorageCollection)
+    fun getCollectionOperation(storageCollection: StorageCollection): Single<StorageCollectionOperations>
             = getCollectionOperations(storageCollection.storage, storageCollection.name)
 
     fun getCollectionOperations(uri: StorageObjectUri): Single<StorageCollectionOperations>
@@ -86,7 +86,7 @@ class StorageOperationsManager internal constructor(
     private fun findPotentialStorageMatchingUri(uri: StorageObjectUri): Single<Storage> {
         val storages = registry.findStoragesByProviderScheme(uri.providerScheme)
         return when (storages.size) {
-            0 -> Single.never()
+            0 -> Single.error(AlfosRuntimeException("Unable to determine storage matching '${uri}'. No storage registered for scheme '${uri.providerScheme}'."))
             1 -> Single.just(storages.get(0))
             else -> Single.error(AlfosRuntimeException("Unable to determine storage matching '${uri}'. It happens when you register two storage with the same provider."))
         }

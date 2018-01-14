@@ -14,12 +14,12 @@ interface StorageServiceProvider {
     val name: String
 
     /**
-     * [NameValidator] to use to check that object/collection name are valid for this storage.
-     */
-    val nameValidator: NameValidator
-
-    /**
      * Scheme used in uri to access storages of this provider.
      */
     val scheme: String
+
+    /**
+     * [NameValidator] to use to check that object/collection name are valid for this storage.
+     */
+    val nameValidator: NameValidator
 }

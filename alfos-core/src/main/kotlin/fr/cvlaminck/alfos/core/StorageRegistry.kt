@@ -15,7 +15,8 @@ class StorageRegistry {
     /**
      * Collection of all storages that have been registered in this registry.
      */
-    val storages: Set<Storage> = _storages
+    val storages: Set<Storage>
+        get() = _storages.toSet()
 
     /**
      * Collection of all providers that have at least a storage registered in

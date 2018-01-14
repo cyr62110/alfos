@@ -8,6 +8,7 @@ import fr.cvlaminck.alfos.model.StorageCollection
 import fr.cvlaminck.alfos.model.StorageObject
 import fr.cvlaminck.alfos.operation.raw.RawStorageCollectionOperations
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 internal class GoogleClougStorageCollectionOperations(
@@ -16,11 +17,11 @@ internal class GoogleClougStorageCollectionOperations(
         val googleStorage: Storage
 ) : RawStorageCollectionOperations {
 
-    override fun getInformation(): Single<StorageCollection>
-            = Single.fromCallable(::getBucket)
+    override fun getInformation(): Maybe<StorageCollection>
+            = Maybe.fromCallable(::getBucket)
             .map(storage.collectionMapper::map)
 
-    private fun getBucket(): Bucket = googleStorage
+    private fun getBucket(): Bucket? = googleStorage
             .get(collectionName, Storage.BucketGetOption.fields(*Storage.BucketField.values())) // FIXME filter only field that are usefull
 
     override fun listObjects(): Flowable<StorageObject>

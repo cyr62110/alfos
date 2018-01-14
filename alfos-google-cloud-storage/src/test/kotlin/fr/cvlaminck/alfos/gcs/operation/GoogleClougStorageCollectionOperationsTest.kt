@@ -15,4 +15,13 @@ internal class GoogleClougStorageCollectionOperationsTest : GoogleCloudTest() {
         assertSame(storage, storageCollection.storage)
         assertEquals("read-collection", storageCollection.name)
     }
+
+    @Test
+    fun getInformation_nonExisting() {
+        val empty = storage.operationsFactory.getStorageCollectionOperations("non-existing-collection")
+                .getInformation()
+                .isEmpty
+                .blockingGet()
+        assertTrue(empty)
+    }
 }

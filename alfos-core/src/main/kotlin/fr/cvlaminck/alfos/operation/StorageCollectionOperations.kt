@@ -5,6 +5,7 @@ import fr.cvlaminck.alfos.model.StorageCollection
 import fr.cvlaminck.alfos.model.StorageObject
 import fr.cvlaminck.alfos.operation.raw.RawStorageCollectionOperations
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 /**
@@ -24,12 +25,16 @@ class StorageCollectionOperations internal constructor(
 
     /**
      * Get information(acl, ...) about the collection.
-     * @return a [Single] emitting the information(acl, ...) about the collection.
+     *
+     * If the collection does not exists, nothing will be emitted in the returned [Maybe].
+     *
+     * @return a [Maybe] emitting the information(acl, ...) about the collection, nothing if it does not exists.
      */
-    fun getInformation(): Single<StorageCollection> = rawStorageCollectionOperations.getInformation()
+    fun getInformation(): Maybe<StorageCollection> = rawStorageCollectionOperations.getInformation()
 
     /**
      * List all objects in the collection.
+     *
      * @return a [Flowable] emitting all objects contained in the collection.
      */
     fun listObjects(): Flowable<StorageObject> = rawStorageCollectionOperations.listObjects()

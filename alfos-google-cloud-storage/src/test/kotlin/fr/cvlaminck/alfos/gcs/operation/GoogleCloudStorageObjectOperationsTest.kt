@@ -18,4 +18,13 @@ internal class GoogleCloudStorageObjectOperationsTest : GoogleCloudTest() {
         assertEquals("read-collection", storageObject.collectionName)
         assertEquals("test", storageObject.name)
     }
+
+    @Test
+    fun getInformation_notExisting() {
+        val empty = storage.operationsFactory.getStorageObjectOperations("read-collection", "non-existing-object")
+                .getInformation()
+                .isEmpty
+                .blockingGet()
+        assertTrue(empty)
+    }
 }

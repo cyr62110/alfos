@@ -1,7 +1,5 @@
 package fr.cvlaminck.alfos.gcs.operation
 
-import com.google.auth.oauth2.GoogleCredentials
-import fr.cvlaminck.alfos.gcs.GoogleCloudStorage
 import fr.cvlaminck.alfos.gcs.GoogleCloudTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag

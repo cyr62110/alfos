@@ -1,12 +1,13 @@
 package fr.cvlaminck.alfos.gcs.mapper
 
 import com.google.cloud.storage.Blob
+import com.google.cloud.storage.BlobInfo
 import fr.cvlaminck.alfos.model.Storage
 import fr.cvlaminck.alfos.model.StorageObject
 
 internal class GoogleCloudStorageObjectMapper(
         private val storage: Storage
-){
+) {
 
     fun map(blob: Blob): StorageObject {
         return StorageObject(

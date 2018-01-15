@@ -9,7 +9,6 @@ import fr.cvlaminck.alfos.model.StorageObject
 import fr.cvlaminck.alfos.operation.raw.RawStorageCollectionOperations
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Single
 
 internal class GoogleClougStorageCollectionOperations(
         val collectionName: String,

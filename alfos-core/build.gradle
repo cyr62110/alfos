@@ -1,1 +1,23 @@
+apply plugin: "com.jfrog.bintray"
+
 version = "1.0"
+
+pkg {
+    repo = 'maven'
+    name = 'alfos-core'
+    licenses = ['Apache-2.0']
+    vcsUrl = 'https://github.com/cyr62110/alfos.git'
+
+    version {
+        name = project.version
+        released  = new Date()
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}

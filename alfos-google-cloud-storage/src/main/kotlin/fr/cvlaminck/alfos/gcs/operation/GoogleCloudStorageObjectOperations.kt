@@ -1,6 +1,7 @@
 package fr.cvlaminck.alfos.gcs.operation
 
 import com.google.cloud.ReadChannel
+import com.google.cloud.WriteChannel
 import com.google.cloud.storage.Blob
 import com.google.cloud.storage.Storage
 import fr.cvlaminck.alfos.gcs.GoogleCloudStorage
@@ -38,7 +39,11 @@ internal class GoogleCloudStorageObjectOperations(
             objectName
     )
 
-    override fun upload(): Single<OutputStream> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun upload(): Single<OutputStream>
+            = Single.fromCallable(::getContentWriteChannel)
+            .map(Channels::newOutputStream)
+
+    private fun getContentWriteChannel(): WriteChannel = googleStorage.writer(
+            storage.objectMapper.map(collectionName, objectName)
+    )
 }

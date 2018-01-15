@@ -15,4 +15,9 @@ internal class GoogleCloudStorageObjectMapper(
                 blob.name
         )
     }
+
+    fun map(collectionName: String, objectName: String): BlobInfo {
+        val info = BlobInfo.newBuilder(collectionName, objectName)
+        return info.build()
+    }
 }

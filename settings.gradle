@@ -1,2 +1,3 @@
 include ":alfos-core"
 include ":alfos-google-cloud-storage"
+include ":alfos-amazon-s3"

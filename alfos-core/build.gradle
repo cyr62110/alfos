@@ -1,0 +1,5 @@
+dependencies { // FIXME compile
+    compile project(":alfos-common-api")
+    compile project(":alfos-adapter-api")
+    compile project(":alfos-api")
+}

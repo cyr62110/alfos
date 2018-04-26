@@ -1,2 +1,8 @@
 include ":alfos-core"
 include ":alfos-google-cloud-storage"
+include 'alfos-api'
+include 'alfos-common-api'
+include 'alfos-adapter-api'
+include 'alfos-fs'
+include 'examples'
+

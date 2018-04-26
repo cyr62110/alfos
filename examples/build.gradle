@@ -1,0 +1,5 @@
+dependencies {
+    compile project(":alfos-core")
+    compile project(":alfos-api")
+    compile project(":alfos-fs")
+}
